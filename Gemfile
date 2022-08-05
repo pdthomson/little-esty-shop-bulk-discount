@@ -3,7 +3,7 @@
 #   "https://github.com/#{repo_name}.git"
 # end
 
-gem 'httparty'
+# gem 'httparty'
 
 ruby '2.7.4'
 
