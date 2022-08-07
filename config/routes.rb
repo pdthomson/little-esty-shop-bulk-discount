@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   get "/merchants/:merchant_id/bulk_discounts/new", to: "bulk_discounts#new"
   get '/merchants/:merchant_id/bulk_discounts/:discount_id', to: "bulk_discounts#show"
   post '/merchants/:merchant_id/bulk_discounts/new', to: 'bulk_discounts#create'
+  delete '/merchants/:merchant_id/bulk_discounts/:discount_id', to: 'bulk_discounts#delete'
+
 end
