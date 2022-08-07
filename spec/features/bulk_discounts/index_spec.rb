@@ -279,6 +279,18 @@ RSpec.describe 'Bulk discounts index page' do
         expect(current_path).to eq("/merchants/#{merchant1.id}/bulk_discounts")
       end
     end
-    expecct(page).to_not have_content(discount2.id)
+    expect(page).to_not have_content(discount1.id)
+
+    within "div#discounts" do
+      expect(page).to have_content(discount2.id)
+
+      within "div#discount-#{discount2.id}" do
+        expect(page).to have_link("Delete")
+        click_link("Delete")
+        expect(current_path).to eq("/merchants/#{merchant1.id}/bulk_discounts")
+      end
+    end
+    expect(page).to_not have_content(discount1.id)
+    expect(page).to_not have_content(discount2.id)
   end
 end
