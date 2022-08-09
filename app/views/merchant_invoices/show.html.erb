@@ -18,14 +18,17 @@
       <p>Quantity: <%= invoice.quantity %></p>
       <p>Price: <%= invoice.unit_price %></p>
       <p>Status: <%= invoice.status %></p>
+      <% if invoice.best_discount %>
+        <p><%= link_to "#{invoice.best_discount.discount_percentage}% Discount", "/merchants/#{@merchant.id}/bulk_discounts/#{invoice.best_discount.id}" %></p>
+      <% end %>
       <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :post, local: true do |form| %>
       <%= form.select :status, options_for_select(InvoiceItem.statuses.map {|k, v| [k.capitalize, k.capitalize] }, selected: "#{invoice.status.capitalize}" ) %>
       <%= hidden_field_tag "invoice_item_id", invoice.id %>
       <%= form.submit 'Update Item Status' %>
       <% end %>
     <% end %>
-  <% end %>
 </div>
+  <% end %>
 
 <div id="invoices-<%= @invoice.id %>">
   <p>Invoice id: <%= @invoice.id %></p>
