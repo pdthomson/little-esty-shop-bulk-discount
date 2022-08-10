@@ -197,7 +197,7 @@ RSpec.describe 'merchants invoice show page', type: :feature do
     merchant3 = Merchant.create!(name: "Dhirley Secasrio's knits and bits", status: "enabled")
 
     item1 = Item.create!(name: "Pikachu pics", description: 'Cute pics with pikachu', unit_price: 1000, merchant_id: merchant1.id)
-    item2 = Item.create!(name: "Pokemon stuffy", description: 'Pikachu stuffed toy', unit_price: 2000, merchant_id: merchant2.id)
+    item2 = Item.create!(name: "Pokemon stuffy", description: 'Pikachu stuffed toy', unit_price: 2000, merchant_id: merchant1.id)
     item3 = Item.create!(name: "Junk", description: 'junk you should want', unit_price: 500, merchant_id: merchant3.id)
 
     customer1 = Customer.create!(first_name: "Parker", last_name: "Thomson")
@@ -227,5 +227,16 @@ RSpec.describe 'merchants invoice show page', type: :feature do
     end
 
     expect(current_path).to eq("/merchants/#{merchant1.id}/bulk_discounts/#{discount1.id}")
+
+    visit "/merchants/#{merchant1.id}/invoices/#{invoice2.id}"
+
+    within "div#invoice" do
+      expect(page).to have_link('30% Discount')
+      expect(page).to_not have_link('20% Discount')
+      click_on '30% Discount'
+    end
+
+    # expect(current_path).to eq("/merchants/#{merchant1.id}/bulk_discounts/#{discount1.id}")
+
   end
 end
