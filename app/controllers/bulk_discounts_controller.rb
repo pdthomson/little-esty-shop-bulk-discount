@@ -3,11 +3,11 @@ class BulkDiscountsController < ApplicationController
   def index
     @discounts = Merchant.find(params[:merchant_id]).bulk_discounts
     @merchant = Merchant.find(params[:merchant_id])
+    @holidays = HolidayFacade.new
   end
 
   def show
     @discount = BulkDiscount.find(params[:discount_id])
-    # @merchant = Merchant.find(params[:merchant_id])
   end
 
   def new
@@ -21,7 +21,6 @@ class BulkDiscountsController < ApplicationController
   end
 
   def delete
-    # binding.pry
     merchant = Merchant.find(params[:merchant_id])
     discount = BulkDiscount.find(params[:discount_id])
     discount.destroy
