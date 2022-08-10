@@ -46,8 +46,8 @@ RSpec.describe InvoiceItem do
       discount2 = BulkDiscount.create!(discount_percentage: 30, quantity:15, merchant_id: merchant1.id)
       discount3 = BulkDiscount.create!(discount_percentage: 40, quantity:20, merchant_id: merchant2.id)
       discount4 = BulkDiscount.create!(discount_percentage: 50, quantity:5, merchant_id: merchant3.id)
-
-      expect(item1.invoice_items.last.best_discount).to eq(discount2)
+# binding.pry
+      expect(invoice_item1.best_discount).to eq(discount2)
     end
 
     it "can check the discounted revenue" do
@@ -77,7 +77,7 @@ RSpec.describe InvoiceItem do
       discount3 = BulkDiscount.create!(discount_percentage: 40, quantity:20, merchant_id: merchant2.id)
       discount4 = BulkDiscount.create!(discount_percentage: 50, quantity:5, merchant_id: merchant3.id)
 
-      expect(item1.invoice_items.last.discounted_revenue).to eq(11200.0)
+      expect(invoice_item1.discounted_revenue).to eq(11200.0)
     end
 
     it "can calculate total revenue" do
